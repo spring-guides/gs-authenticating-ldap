@@ -380,5 +380,7 @@ Welcome to the home page!
 
 Next Steps
 ----------
-Congratulations! You have just written a client and server that both handle uploading files using Spring.
+Congratulations! You have just written a client and server that both handle uploading files using Spring Security.
 
+- You can find detailed documentation at [Spring Security 3.2.x reference](http://static.springsource.org/spring-security/site/docs/3.2.x/reference/springsecurity-single.html).
+- See [LDAP-specific Spring Security references](http://static.springsource.org/spring-security/site/docs/3.2.x/reference/springsecurity-single.html#ldap)
