@@ -9,10 +9,9 @@
 	<ldap-server root="dc=springframework,dc=org" />
 
 	<authentication-manager>
-		<ldap-authentication-provider user-dn-pattern="uid={0},ou=people" group-search-base="ou=groups"/>
+		<ldap-authentication-provider user-dn-pattern="uid={0},ou=people" 
+												group-search-base="ou=groups"/>
 	</authentication-manager>
-
-	<global-method-security secured-annotations="enabled" />
 
 	<http auto-config="true">
 		<intercept-url pattern="/**" access="ROLE_DEVELOPERS" />
