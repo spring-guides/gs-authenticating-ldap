@@ -1,0 +1,55 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+apply plugin: 'application'
+mainClassName = "ldapauthentication.ServletContext"
+
+repositories { mavenCentral() }
+
+ext.springVersion = '3.2.2.RELEASE'
+ext.springSecurityVersion = '3.1.3.RELEASE'
+ext.jettyVersion = '8.1.10.v20130312'
+ext.apacheDsVersion = '1.5.5'
+ext.apacheDSWorkDir = "/Users/gturnquist/apache-ds-server"
+
+gradle.taskGraph.beforeTask { Task task ->
+	println "About to run ${task.name}"
+	if (task.name == "run") {
+		delete apacheDSWorkDir 
+		run.systemProperties['apacheDSWorkDir'] = apacheDSWorkDir
+	}
+}
+
+def springSecurity = [
+	"org.springframework.security:spring-security-web:$springSecurityVersion",
+	"org.springframework.security:spring-security-ldap:$springSecurityVersion",
+	"org.springframework.security:spring-security-config:$springSecurityVersion"
+]
+
+dependencies {
+	compile "org.springframework:spring-context:$springVersion"
+	compile "org.springframework:spring-webmvc:$springVersion"
+	compile "org.springframework:spring-tx:$springVersion"
+	springSecurity.each {
+		compile(it) {
+			exclude module: "spring-context"
+			exclude module: "spring-webmvc"
+			exclude module: "spring-tx"
+			
+		}
+	}
+	compile "org.eclipse.jetty:jetty-server:$jettyVersion"
+	compile "org.eclipse.jetty:jetty-servlet:$jettyVersion"
+	compile "org.eclipse.jetty:jetty-annotations:$jettyVersion"
+	compile "org.apache.directory.server:apacheds-core:$apacheDsVersion"
+	compile "org.apache.directory.server:apacheds-core-entry:$apacheDsVersion"
+	compile "org.apache.directory.server:apacheds-protocol-shared:$apacheDsVersion"
+	compile "org.apache.directory.server:apacheds-protocol-ldap:$apacheDsVersion"
+	compile "org.apache.directory.server:apacheds-server-jndi:$apacheDsVersion"
+	compile 'org.apache.directory.shared:shared-ldap:0.9.15'
+	compile "org.slf4j:slf4j-log4j12:1.7.5"
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '1.5'
+}
