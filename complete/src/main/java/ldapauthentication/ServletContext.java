@@ -32,6 +32,7 @@ public class ServletContext {
         WebAppContext webAppContext = new WebAppContext();
         webAppContext.setContextPath("/");
         
+        // This solution was drawn from http://stackoverflow.com/questions/13222071/spring-3-1-webapplicationinitializer-embedded-jetty-8-annotationconfiguration
         webAppContext.setConfigurations(new Configuration[]{
         		new AnnotationConfiguration() {
 
