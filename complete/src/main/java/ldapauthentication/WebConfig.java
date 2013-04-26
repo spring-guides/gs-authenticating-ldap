@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan
+@ComponentScan(excludeFilters = { @ComponentScan.Filter( Configuration.class ) })
 @EnableWebMvc
 public class WebConfig {
 

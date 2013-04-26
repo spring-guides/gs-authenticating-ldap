@@ -105,20 +105,20 @@ objectclass: top
 objectclass: groupOfNames
 cn: developers
 ou: developer
-member: uid=ben,ou=people,dc=springframework,dc=org
-member: uid=bob,ou=people,dc=springframework,dc=org
+uniqueMember: uid=ben,ou=people,dc=springframework,dc=org
+uniqueMember: uid=bob,ou=people,dc=springframework,dc=org
 
 dn: cn=managers,ou=groups,dc=springframework,dc=org
 objectclass: top
 objectclass: groupOfNames
 cn: managers
 ou: manager
-member: uid=ben,ou=people,dc=springframework,dc=org
-member: cn=mouse\, jerry,ou=people,dc=springframework,dc=org
+uniqueMember: uid=ben,ou=people,dc=springframework,dc=org
+uniqueMember: cn=mouse\, jerry,ou=people,dc=springframework,dc=org
 
 dn: cn=submanagers,ou=subgroups,ou=groups,dc=springframework,dc=org
 objectclass: top
 objectclass: groupOfNames
 cn: submanagers
 ou: submanager
-member: uid=ben,ou=people,dc=springframework,dc=org
+uniqueMember: uid=ben,ou=people,dc=springframework,dc=org

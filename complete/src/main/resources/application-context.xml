@@ -13,11 +13,9 @@
 	</authentication-manager>
 
 	<global-method-security secured-annotations="enabled" />
-	
-	<http>
-		<form-login/>
-		<http-basic/>
-		<logout/>
-	</http>
+
+	<http auto-config="true">
+		<intercept-url pattern="/**" access="ROLE_DEVELOPERS" />
+	</http>	
 
 </beans:beans>
