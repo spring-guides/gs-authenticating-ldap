@@ -13,7 +13,6 @@ ext.apacheDsVersion = '1.5.5'
 ext.apacheDSWorkDir = "/Users/gturnquist/apache-ds-server"
 
 gradle.taskGraph.beforeTask { Task task ->
-	println "About to run ${task.name}"
 	if (task.name == "run") {
 		delete apacheDSWorkDir 
 		run.systemProperties['apacheDSWorkDir'] = apacheDSWorkDir
