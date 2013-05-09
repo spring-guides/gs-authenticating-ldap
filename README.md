@@ -9,7 +9,7 @@ To help you get started, we've provided an initial project structure as well as 
 $ git clone https://github.com/springframework-meta/gs-authenticating-ldap.git
 ```
 
-In the `start` folder, you'll find a bare project, ready for you to copy-n-paste code snippets from this document. In the `complete` folder, you'll find the complete project code.
+In the `initial` folder, you'll find a bare project, ready for you to copy-n-paste code snippets from this document. In the `complete` folder, you'll find the complete project code.
 
 Before we can lock down our application with an LDAP server, there's some initial project setup that's required. Or, you can skip straight to the [fun part](#setting-up-spring-security).
 
