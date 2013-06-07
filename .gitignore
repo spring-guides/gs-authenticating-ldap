@@ -23,7 +23,6 @@ build/
 *.iws
 *.idea
 
-# Test files
+# Spring Bootstrap artifacts
 
-*-uploaded
-
+dependency-reduced-pom.xml

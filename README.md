@@ -1,42 +1,111 @@
 Getting Started: Authenticating a user with LDAP
 ================================================
 
-This Getting Started guide will walk you through the process of creating a server that can receive multi-part file uploads as well as building a client to upload a file.
+What you'll build
+-----------------
 
-To help you get started, we've provided an initial project structure as well as the completed project for you in GitHub:
+This Getting Started guide will walk you through the process configuring an application to be secured by an LDAP server.
 
-```sh
-$ git clone https://github.com/springframework-meta/gs-authenticating-ldap.git
+What you'll need
+----------------
+
+ - About 15 minutes
+ - A favorite text editor or IDE
+ - [JDK 6][jdk] or later
+ - [Maven 3.0][mvn] or later
+
+[jdk]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
+[mvn]: http://maven.apache.org/download.cgi
+
+How to complete this guide
+--------------------------
+
+Like all Spring's [Getting Started guides](/getting-started), you can start from scratch and complete each step, or you can bypass basic setup steps that are already familiar to you. Either way, you end up with working code.
+
+To **start from scratch**, move on to [Set up the project](#scratch).
+
+To **skip the basics**, do the following:
+
+ - [Download][zip] and unzip the source repository for this guide, or clone it using [git](/understanding/git):
+`git clone https://github.com/springframework-meta/{@project-name}.git`
+ - cd into `{@project-name}/initial`
+ - Jump ahead to [Create a resource representation class](#initial).
+
+**When you're finished**, you can check your results against the code in `{@project-name}/complete`.
+
+
+<a name="scratch"></a>
+Set up the project
+------------------
+
+First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Getting Started with Maven](../gs-maven/README.md) or [Getting Started with Gradle](../gs-gradle/README.md).
+
+### Create the directory structure
+
+In a project directory of your choosing, create the following subdirectory structure; for example, with `mkdir -p src/main/java/hello` on *nix systems:
+
+    └── src
+        └── main
+            └── java
+                └── hello
+
+### Create a Maven POM
+
+`pom.xml`
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.springframework</groupId>
+    <artifactId>gs-authenticating-ldap-initial</artifactId>
+    <version>0.1.0</version>
+
+    <parent>
+        <groupId>org.springframework.bootstrap</groupId>
+        <artifactId>spring-bootstrap-starters</artifactId>
+        <version>0.5.0.BUILD-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.bootstrap</groupId>
+            <artifactId>spring-bootstrap-starter</artifactId>
+            <version>0.5.0.BUILD-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+    
+    <!-- TODO: remove once bootstrap goes GA -->
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>http://repo.springsource.org/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>http://repo.springsource.org/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+</project>
 ```
 
-In the `initial` folder, you'll find a bare project, ready for you to copy-n-paste code snippets from this document. In the `complete` folder, you'll find the complete project code.
+TODO: mention that we're using Spring Bootstrap's [_starter POMs_](../gs-bootstrap-starter) here.
 
-Before we can lock down our application with an LDAP server, there's some initial project setup that's required. Or, you can skip straight to the [fun part](#setting-up-spring-security).
+Note to experienced Maven users who are unaccustomed to using an external parent project: you can take it out later, it's just there to reduce the amount of code you have to write to get started.
 
-Selecting Dependencies
-----------------------
-The sample in this Getting Started Guide will leverage Spring MVC, Spring Security, and Jetty's embedded servlet container. Therefore, the following library dependencies are needed in the project's build configuration:
 
-- org.springframework.security:spring-security-web:3.1.3.RELEASE
-- org.springframework.security:spring-security-ldap:3.1.3.RELEASE
-- org.springframework.security:spring-security-config:3.1.3.RELEASE
-- org.springframework:spring-context:3.2.2.RELEASE
-- org.springframework:spring-webmvc:3.2.2.RELEASE
-- org.springframework:spring-tx:3.2.2.RELEASE
-- org.eclipse.jetty:jetty-server:8.1.10.v20130312
-- org.eclipse.jetty:jetty-servlet:8.1.10.v20130312
-- org.eclipse.jetty:jetty-annotations:8.1.10.v20130312
-- org.apache.directory.server:apacheds-core:1.5.5
-- org.apache.directory.server:apacheds-core-entry:1.5.5
-- org.apache.directory.server:apacheds-protocol-shared:1.5.5
-- org.apache.directory.server:apacheds-protocol-ldap:1.5.5
-- org.apache.directory.server:apacheds-server-jndi:1.5.5
-- org.apache.directory.shared:shared-ldap:0.9.15
-- org.slf4j:slf4j-log4j12:1.7.5"
-
-	
-Refer to the [Gradle Getting Started Guide]() or the [Maven Getting Started Guide]() for details on how to include these dependencies in your build.
-
+<a name="initial"></a>
 Setting up a Jetty Server
 -------------------------
 We need a servlet container to run our web app. For this, we'll use embedded Jetty.

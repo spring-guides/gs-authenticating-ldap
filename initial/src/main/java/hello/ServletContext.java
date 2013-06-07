@@ -1,4 +1,4 @@
-package ldapauthentication;
+package hello;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.Configuration;

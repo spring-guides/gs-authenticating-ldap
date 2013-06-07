@@ -1,11 +1,11 @@
-package ldapauthentication;
+package hello;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan(excludeFilters = { @ComponentScan.Filter( Configuration.class ) })
+@ComponentScan
 @EnableWebMvc
 public class WebConfig {
 

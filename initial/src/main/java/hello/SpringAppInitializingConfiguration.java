@@ -1,4 +1,4 @@
-package ldapauthentication;
+package hello;
 
 import java.io.IOException;
 import java.net.URL;

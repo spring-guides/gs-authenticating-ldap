@@ -1,42 +1,36 @@
 Getting Started: Authenticating a user with LDAP
 ================================================
 
-This Getting Started guide will walk you through the process of creating a server that can receive multi-part file uploads as well as building a client to upload a file.
+What you'll build
+-----------------
 
-To help you get started, we've provided an initial project structure as well as the completed project for you in GitHub:
+This Getting Started guide will walk you through the process configuring an application to be secured by an LDAP server.
 
-```sh
-$ git clone https://github.com/springframework-meta/gs-authenticating-ldap.git
-```
+What you'll need
+----------------
 
-In the `initial` folder, you'll find a bare project, ready for you to copy-n-paste code snippets from this document. In the `complete` folder, you'll find the complete project code.
+ - About 15 minutes
+ - {!include#prereq-editor-jdk-buildtools}
 
-Before we can lock down our application with an LDAP server, there's some initial project setup that's required. Or, you can skip straight to the [fun part](#setting-up-spring-security).
+## {!include#how-to-complete-this-guide}
 
-Selecting Dependencies
-----------------------
-The sample in this Getting Started Guide will leverage Spring MVC, Spring Security, and Jetty's embedded servlet container. Therefore, the following library dependencies are needed in the project's build configuration:
 
-- org.springframework.security:spring-security-web:3.1.3.RELEASE
-- org.springframework.security:spring-security-ldap:3.1.3.RELEASE
-- org.springframework.security:spring-security-config:3.1.3.RELEASE
-- org.springframework:spring-context:3.2.2.RELEASE
-- org.springframework:spring-webmvc:3.2.2.RELEASE
-- org.springframework:spring-tx:3.2.2.RELEASE
-- org.eclipse.jetty:jetty-server:8.1.10.v20130312
-- org.eclipse.jetty:jetty-servlet:8.1.10.v20130312
-- org.eclipse.jetty:jetty-annotations:8.1.10.v20130312
-- org.apache.directory.server:apacheds-core:1.5.5
-- org.apache.directory.server:apacheds-core-entry:1.5.5
-- org.apache.directory.server:apacheds-protocol-shared:1.5.5
-- org.apache.directory.server:apacheds-protocol-ldap:1.5.5
-- org.apache.directory.server:apacheds-server-jndi:1.5.5
-- org.apache.directory.shared:shared-ldap:0.9.15
-- org.slf4j:slf4j-log4j12:1.7.5"
+<a name="scratch"></a>
+Set up the project
+------------------
 
-	
-Refer to the [Gradle Getting Started Guide]() or the [Maven Getting Started Guide]() for details on how to include these dependencies in your build.
+{!include#build-system-intro}
 
+{!include#create-directory-structure-hello}
+
+### Create a Maven POM
+
+    {!include:initial/pom.xml}
+
+{!include#bootstrap-starter-pom-disclaimer}
+
+
+<a name="initial"></a>
 Setting up a Jetty Server
 -------------------------
 We need a servlet container to run our web app. For this, we'll use embedded Jetty.

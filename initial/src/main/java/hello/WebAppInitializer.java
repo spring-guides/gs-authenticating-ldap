@@ -1,4 +1,4 @@
-package ldapauthentication;
+package hello;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
