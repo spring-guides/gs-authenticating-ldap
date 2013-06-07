@@ -103,12 +103,7 @@ In a project directory of your choosing, create the following subdirectory struc
         	<artifactId>spring-security-config</artifactId>
         	<version>${spring.security.version}</version>
         </dependency>
-<!--         <dependency>
-        	<groupId>org.apache.directory.server</groupId>
-        	<artifactId>apacheds-core</artifactId>
-        	<version>${apacheds.version}</version>
-        </dependency>
- -->        <dependency>
+        <dependency>
         	<groupId>org.apache.directory.server</groupId>
         	<artifactId>apacheds-server-jndi</artifactId>
         	<version>${apacheds.version}</version>
