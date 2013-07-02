@@ -152,7 +152,8 @@ In a project directory of your choosing, create the following subdirectory struc
 
 TODO: mention that we're using Spring Bootstrap's [_starter POMs_](../gs-bootstrap-starter) here.
 
-Note to experienced Maven users who are unaccustomed to using an external parent project: you can take it out later, it's just there to reduce the amount of code you have to write to get started.
+> Note to experienced Maven users who don't use an external parent project: You can take out the project later, it's just there to reduce the amount of code you have to write to get started.
+
 
 
 <a name="initial"></a>
@@ -441,3 +442,6 @@ Welcome to the home page!
 Summary
 -------
 Congratulations! You have just written a web application and secured it with [Spring Security](http://static.springsource.org/spring-security/site/docs/3.2.x/reference/springsecurity-single.html). In this case, you used an [LDAP-based user store](http://static.springsource.org/spring-security/site/docs/3.2.x/reference/springsecurity-single.html#ldap).
+
+[zip]: https://github.com/springframework-meta/gs-authenticating-ldap/archive/master.zip
+
