@@ -65,50 +65,29 @@ In a project directory of your choosing, create the following subdirectory struc
     <version>0.1.0</version>
 
     <parent>
-        <groupId>org.springframework.bootstrap</groupId>
-        <artifactId>spring-bootstrap-starters</artifactId>
+        <groupId>org.springframework.zero</groupId>
+        <artifactId>spring-starter-parent</artifactId>
         <version>0.5.0.BUILD-SNAPSHOT</version>
     </parent>
 
-    <properties>
-        <start-class>hello.Application</start-class>
-        <spring-security.version>3.1.3.RELEASE</spring-security.version>
-		<apacheds.version>1.5.5</apacheds.version>
-     </properties>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-    
     <dependencies>
         <dependency>
-            <groupId>org.springframework.bootstrap</groupId>
-            <artifactId>spring-bootstrap-web-starter</artifactId>
+            <groupId>org.springframework.zero</groupId>
+            <artifactId>spring-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.zero</groupId>
+            <artifactId>spring-starter-security</artifactId>
         </dependency>
         <dependency>
         	<groupId>org.springframework.security</groupId>
         	<artifactId>spring-security-ldap</artifactId>
-        	<version>${spring.security.version}</version>
-        </dependency>
-        <dependency>
-        	<groupId>org.springframework.security</groupId>
-        	<artifactId>spring-security-web</artifactId>
-        	<version>${spring.security.version}</version>
-        </dependency>
-        <dependency>
-        	<groupId>org.springframework.security</groupId>
-        	<artifactId>spring-security-config</artifactId>
-        	<version>${spring.security.version}</version>
+        	<version>3.1.3.RELEASE</version>
         </dependency>
         <dependency>
         	<groupId>org.apache.directory.server</groupId>
         	<artifactId>apacheds-server-jndi</artifactId>
-        	<version>${apacheds.version}</version>
+        	<version>1.5.5</version>
         </dependency>
     </dependencies>
     
@@ -235,7 +214,7 @@ To configure Spring Security, you need an XML application context file. Let's cr
   xsi:schemaLocation="http://www.springframework.org/schema/beans 
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
            http://www.springframework.org/schema/security
-           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+           http://www.springframework.org/schema/security/spring-security-3.2.xsd">
      
 	<ldap-server root="dc=springframework,dc=org" ldif="classpath:test-server.ldif" />
 
@@ -267,8 +246,8 @@ To wire in Spring Security, we need to update our configuration class and pull i
 ```java
 package hello;
 
+import org.springframework.autoconfigure.EnableAutoConfiguration;
 import org.springframework.bootstrap.SpringApplication;
-import org.springframework.bootstrap.context.annotation.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
