@@ -1,7 +1,4 @@
 
-Getting Started: Authenticating a user with LDAP
-================================================
-
 What you'll build
 -----------------
 
