@@ -92,7 +92,7 @@ In a project directory of your choosing, create the following subdirectory struc
         <repository>
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
-            <url>http://repo.springsource.org/milestone</url>
+            <url>http://repo.springsource.org/libs-milestone</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -100,7 +100,7 @@ In a project directory of your choosing, create the following subdirectory struc
         <repository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>
-            <url>http://repo.springsource.org/snapshot</url>
+            <url>http://repo.springsource.org/libs-snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -110,7 +110,7 @@ In a project directory of your choosing, create the following subdirectory struc
         <pluginRepository>
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
-            <url>http://repo.springsource.org/milestone</url>
+            <url>http://repo.springsource.org/libs-milestone</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -118,7 +118,7 @@ In a project directory of your choosing, create the following subdirectory struc
         <pluginRepository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>
-            <url>http://repo.springsource.org/snapshot</url>
+            <url>http://repo.springsource.org/libs-snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
