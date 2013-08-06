@@ -88,7 +88,6 @@ In a project directory of your choosing, create the following subdirectory struc
         </dependency>
     </dependencies>
     
-    <!-- TODO: remove once bootstrap goes GA -->
     <repositories>
         <repository>
             <id>spring-milestones</id>
@@ -170,8 +169,8 @@ Before you secure the web application, it's best to verify it works first. To do
 ```java
 package hello;
 
-import org.springframework.bootstrap.SpringApplication;
-import org.springframework.bootstrap.context.annotation.EnableAutoConfiguration;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
