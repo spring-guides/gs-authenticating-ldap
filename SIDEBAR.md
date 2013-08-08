@@ -6,7 +6,7 @@ There's more to application security than what is presented here. You may want t
 
 * [Securing a Web Application][gs-securing-web]
 
-[gs-securing-web]: /guides/gs/securing-web/content
+[gs-securing-web]: /guides/gs/securing-web/
 
 ### Tutorials
 
