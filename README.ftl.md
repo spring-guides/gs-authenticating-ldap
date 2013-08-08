@@ -1,9 +1,10 @@
 <#assign project_id="gs-authenticating-ldap">
+This Getting Started guide will walk you through the process configuring an application to be secured by an LDAP server.
 
 What you'll build
 -----------------
 
-This Getting Started guide will walk you through the process configuring an application to be secured by an LDAP server.
+You'll build a simple web application that is secured by a Java-based LDAP server loaded with a fixed data file. But it's adaptable to a production LDAP server.
 
 What you'll need
 ----------------

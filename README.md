@@ -1,8 +1,9 @@
+This Getting Started guide will walk you through the process configuring an application to be secured by an LDAP server.
 
 What you'll build
 -----------------
 
-This Getting Started guide will walk you through the process configuring an application to be secured by an LDAP server.
+You'll build a simple web application that is secured by a Java-based LDAP server loaded with a fixed data file. But it's adaptable to a production LDAP server.
 
 What you'll need
 ----------------
@@ -37,7 +38,7 @@ To **skip the basics**, do the following:
 Set up the project
 ------------------
 
-First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Building Java Projects with Maven](/guides/gs/maven/) or [Building Java Projects with Gradle](/guides/gs/gradle/).
+First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Building Java Projects with Maven](/guides/gs/maven) or [Building Java Projects with Gradle](/guides/gs/gradle/).
 
 ### Create the directory structure
 
