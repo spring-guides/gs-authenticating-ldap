@@ -6,15 +6,15 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
      
-	<ldap-server root="dc=springframework,dc=org" ldif="classpath:test-server.ldif" />
+    <ldap-server root="dc=springframework,dc=org" ldif="classpath:test-server.ldif" />
 
-	<authentication-manager>
-		<ldap-authentication-provider user-dn-pattern="uid={0},ou=people" 
-												group-search-base="ou=groups"/>
-	</authentication-manager>
+    <authentication-manager>
+        <ldap-authentication-provider user-dn-pattern="uid={0},ou=people" 
+                                                group-search-base="ou=groups"/>
+    </authentication-manager>
 
-	<http auto-config="true">
-		<intercept-url pattern="/**" access="ROLE_DEVELOPERS" />
-	</http>	
+    <http auto-config="true">
+        <intercept-url pattern="/**" access="ROLE_DEVELOPERS" />
+    </http> 
 
 </beans:beans>

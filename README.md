@@ -78,26 +78,18 @@ In a project directory of your choosing, create the following subdirectory struc
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
-        	<groupId>org.springframework.security</groupId>
-        	<artifactId>spring-security-ldap</artifactId>
-        	<version>3.1.3.RELEASE</version>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-ldap</artifactId>
+            <version>3.1.3.RELEASE</version>
         </dependency>
         <dependency>
-        	<groupId>org.apache.directory.server</groupId>
-        	<artifactId>apacheds-server-jndi</artifactId>
-        	<version>1.5.5</version>
+            <groupId>org.apache.directory.server</groupId>
+            <artifactId>apacheds-server-jndi</artifactId>
+            <version>1.5.5</version>
         </dependency>
     </dependencies>
     
     <repositories>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>http://repo.springsource.org/libs-milestone</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
         <repository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>
@@ -107,15 +99,8 @@ In a project directory of your choosing, create the following subdirectory struc
             </snapshots>
         </repository>
     </repositories>
+
     <pluginRepositories>
-        <pluginRepository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>http://repo.springsource.org/libs-milestone</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
         <pluginRepository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>
@@ -125,6 +110,7 @@ In a project directory of your choosing, create the following subdirectory struc
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
 </project>
 ```
 
@@ -149,10 +135,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HomeController {
 
-	@RequestMapping("/")
-	public @ResponseBody String index() {
-		return "Welcome to the home page!";
-	}
+    @RequestMapping("/")
+    public @ResponseBody String index() {
+        return "Welcome to the home page!";
+    }
 }
 ```
     
@@ -182,10 +168,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableAutoConfiguration
 public class Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
-	
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+
 }
 ```
 
@@ -213,16 +199,16 @@ To configure Spring Security, you need an XML application context file. Let's cr
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
      
-	<ldap-server root="dc=springframework,dc=org" ldif="classpath:test-server.ldif" />
+    <ldap-server root="dc=springframework,dc=org" ldif="classpath:test-server.ldif" />
 
-	<authentication-manager>
-		<ldap-authentication-provider user-dn-pattern="uid={0},ou=people" 
-												group-search-base="ou=groups"/>
-	</authentication-manager>
+    <authentication-manager>
+        <ldap-authentication-provider user-dn-pattern="uid={0},ou=people" 
+                                                group-search-base="ou=groups"/>
+    </authentication-manager>
 
-	<http auto-config="true">
-		<intercept-url pattern="/**" access="ROLE_DEVELOPERS" />
-	</http>	
+    <http auto-config="true">
+        <intercept-url pattern="/**" access="ROLE_DEVELOPERS" />
+    </http> 
 
 </beans:beans>
 ```
@@ -257,10 +243,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableAutoConfiguration
 public class Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
-	
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+
 }
 ```
 
