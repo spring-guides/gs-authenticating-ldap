@@ -16,8 +16,10 @@ There's more to application security than what is presented here. You can contin
 
 ### Concepts and technologies
 
+* [Application Context][u-application-context]
 * [REST][u-rest]
 * [JSON][u-json]
 
+<@u_application_context/>
 <@u_rest/>
 <@u_json/>

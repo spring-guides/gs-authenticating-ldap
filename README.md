@@ -1,9 +1,10 @@
-This Getting Started guide will walk you through the process configuring an application to be secured by an LDAP server.
+
+This guide walks you through the process creating an application and securing it with the [Spring Security](http://static.springsource.org/spring-security/site/index.html) LDAP module.
 
 What you'll build
 -----------------
 
-You'll build a simple web application that is secured by a Java-based LDAP server loaded with a fixed data file. But it's adaptable to a production LDAP server.
+You'll build a simple web application that is secured by Spring Security's embedded Java-based LDAP server. You'll load the LDAP server with a data file containing a set of users.
 
 What you'll need
 ----------------
@@ -129,7 +130,7 @@ Note to experienced Maven users who are unaccustomed to using an external parent
 
 
 <a name="initial"></a>
-Creating a simple web controller
+Create a simple web controller
 --------------------------------
 In Spring, REST endpoints are just Spring MVC controllers. The following Spring MVC controller handles a `GET /` request by returning a simple message:
 
@@ -151,15 +152,15 @@ public class HomeController {
 }
 ```
     
-First of all, this entire class is marked up with `@Controller` so Spring MVC can pick it up and look for routes.
+The entire class is marked up with `@Controller` so Spring MVC can autodetect the controller using it's built-in scanning features and automatically configure web routes.
 
-Next, the method has been tagged with `@RequestMapping` to flag the path and the REST action. In this case, `GET` is the default behavior, it will return back a very simple message indicating you are on the home page. 
+The method is tagged with `@RequestMapping` to flag the path and the REST action. In this case, `GET` is the default behavior; it returns a message indicating that you are on the home page. 
 
-Finally, `@ResponseBody` tells Spring MVC to write the text directly into the HTTP response body. That's because there aren't any views. Instead, when you visit the page, you'll get a very simple message in the browser. That's because the focus in this guide is on securing the page with LDAP.
+`@ResponseBody` tells Spring MVC to write the text directly into the HTTP response body, because there aren't any views. Instead, when you visit the page, you'll get a simple message in the browser as the focus of this guide is securing the page with LDAP.
 
-Running an unsecured web application
--------------------------------------
-Before you secure the web application, it's best to verify it works first. To do that, we need to wire up a web application configuration.
+Build the unsecured web application
+-----------------------------------
+Before you secure the web application, verify that it works. To do that, you need to define some key beans. To do that, create an `Application` class.
 
 `src/main/java/hello/Application.java`
 ```java
@@ -183,20 +184,60 @@ public class Application {
 
 }
 ```
+    
+### Build an executable JAR
+Now that your `Application` class is ready, you simply instruct the build system to create a single, executable jar containing everything. This makes it easy to ship, version, and deploy the service as an application throughout the development lifecycle, across different environments, and so forth.
 
-Using Spring Bootstrap, that's enough to launch our unsecured web application.
+Add the following configuration to your existing Maven POM:
 
-    mvn package && java -jar target/gs-authenticating-ldap-complete-0.1.0.jar
+`pom.xml`
+```xml
+    <properties>
+        <start-class>hello.Application</start-class>
+    </properties>
 
-Open a browser and visit <http://localhost:8080/>, and you should see a simple message.
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+```
+
+The `start-class` property tells Maven to create a `META-INF/MANIFEST.MF` file with a `Main-Class: hello.Application` entry. This entry enables you to run it with `mvn spring-boot:run` (or simply run the jar itself with `java -jar`).
+
+The [Spring Boot maven plugin][spring-boot-maven-plugin] collects all the jars on the classpath and builds a single "über-jar", which makes it more convenient to execute and transport your service.
+
+Now run the following command to produce a single executable JAR file containing all necessary dependency classes and resources:
+
+```sh
+$ mvn package
+```
+
+[spring-boot-maven-plugin]: https://github.com/SpringSource/spring-boot/tree/master/spring-boot-tools/spring-boot-maven-plugin
+
+> **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/convert-jar-to-war/) instead.
+
+Run the unsecured web application
+-------------------
+Run your unsecured web application using the spring-boot plugin at the command line:
+
+```sh
+$ mvn spring-boot:run
+```
+
+
+If you open your browser and visit <http://localhost:8080>, you should see the following plain text:
 
 ```
 Welcome to the home page!
 ```
 
-Setting up Spring Security
+Set up Spring Security
 ----------------------------
-To configure Spring Security, you need an XML application context file. Let's create **application-context.xml**. To make it easier to read, it has been configured by default to use the `security` namespace.
+To configure Spring Security, you need an XML application context file, **application-context.xml**. To make the file easier to read, it is configured by default to use the `security` namespace.
 
 `src/main/resources/application-context.xml`
 ```xml
@@ -222,17 +263,21 @@ To configure Spring Security, you need an XML application context file. Let's cr
 </beans:beans>
 ```
 
-> **Note:** Unfortunately, at the time of writing, a Java-based version of Spring Security setup is still under development.
+> **Note:** At the time of this writing, a Java-based version of Spring Security setup is still under development. That's why for now, this guide is using XML to configure the security parts.
 
-First of all, we need an LDAP server. While we could install a full-blown directory server to provide this, Spring Security's LDAP module includes an embedded one written in pure Java. It we eventually replace the embedded LDAP server with a real one, it's a one-line change to point to the real one.
+You also need an LDAP server. Spring Security's LDAP module includes an embedded server written in pure Java, which is being used for this guide. You can eventually replace the embedded LDAP server with a production-ready server by editing **application-context.xml** like this:
 
-Next, we need to declare `<authentication-manager>` as the component that will handle all authentication requests. In this setup, it contains an `<ldap-authentication-provider>`. It's configured to take a username, and insert it into `{0}` and look for `uid={0},ou=people,dc=springframework,dc=org`
+```xml
+<ldap-server url="ldap://<your production server>:389/dc=springframework,dc=org" />
+```
 
-Finally, we need the `<http>` component to declare a set of URL intercepts as well as some other automatic components such as form authentication.
+Next, you declare `<authentication-manager>` as the component that handles all authentication requests. In this setup, it contains an `<ldap-authentication-provider>`. It's configured to take a username, and insert it into `{0}` and look for `uid={0},ou=people,dc=springframework,dc=org`
 
-Wiring an XML application context into our Java configuration
--------------------------------------------------------------
-To wire in Spring Security, we need to update our configuration class and pull in the XML configuration we just defined.
+The `<http>` component declares a set of URL intercepts and other automatic components such as form authentication.
+
+Using an XML configuration inside a pure Java configuration
+-----------------------------------------------------------
+The Spring Security beans are defined in XML format inside **application-context.xml**, but your application is launched from a pure Java `Application` class. To combine them, edit your `Application` class like this:
 
 `src/main/java/hello/Application.java`
 ```java
@@ -259,12 +304,12 @@ public class Application {
 }
 ```
 
-`@ImportResource` pulls **application-context.xml** into this application context configuration.
+`@ImportResource` pulls **application-context.xml** into the [application context][u-application-context] configuration.
 
-Setting up user data
+Set up user data
 --------------------
 
-LDAP servers can exchange user data using LDIF files. We have it configured to pull in a file using the **ldif** parameter of the `<ldap-server>` element in **application-context.xml**.
+LDAP servers can use LDIF (LDAP Data Interchange Format) files to exchange user data. `<ldap-server>` inside **application-context.xml** is configured to pull in an LDIF data file using the **ldif** parameter. This makes it easy to pre-load demonstration data.
 
 `src/main/resources/test-server.ldif`
 ```ldif
@@ -396,49 +441,17 @@ uniqueMember: uid=ben,ou=people,dc=springframework,dc=org
     
 > **Note:** Using an LDIF file isn't standard configuration for a production system. However, it's very useful for testing purposes or guides.
 
-Now that your `Application` class is ready, you simply instruct the build system to create a single, executable jar containing everything. This makes it easy to ship, version, and deploy the service as an application throughout the development lifecycle, across different environments, and so forth.
-
-Add the following configuration to your existing Maven POM:
-
-`pom.xml`
-```xml
-    <properties>
-        <start-class>hello.Application</start-class>
-    </properties>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-```
-
-The `start-class` property tells Maven to create a `META-INF/MANIFEST.MF` file with a `Main-Class: hello.Application` entry. This entry enables you to run it with `mvn spring-boot:run` (or simply run the jar itself with `java -jar`).
-
-The [Spring Boot maven plugin][spring-boot-maven-plugin] collects all the jars on the classpath and builds a single "über-jar", which makes it more convenient to execute and transport your service.
-
-Now run the following command to produce a single executable JAR file containing all necessary dependency classes and resources:
+Build and run the secured web application
+-----------------------------------------
+With Spring Security setup, you can now run the application in secured mode:
 
 ```sh
-$ mvn package
+$ mvn package spring-boot:run
 ```
 
-[spring-boot-maven-plugin]: https://github.com/SpringSource/spring-boot/tree/master/spring-boot-tools/spring-boot-maven-plugin
+If you visit the site at <http://localhost:8080>, you should be redirected to a login page provided by Spring Security.
 
-> **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/convert-jar-to-war/) instead.
-
-Building and Running the Secured Web Application
-------------------------------------------------
-With Spring Security wired in, you can now run it in secured mode:
-
-    mvn package && java -jar target/gs-authenticating-ldap-complete-0.1.0.jar
-
-Great! If you visit the site at <http://localhost:8080>, you should get redirected to a login page provided by Spring Security.
-
-Enter username **ben** and password **benspassword**. It should then let you in to see a very simple message in your browser.
+Enter username **ben** and password **benspassword**. You should see this message in your browser:
 
 ```
 Welcome to the home page!
@@ -447,4 +460,6 @@ Welcome to the home page!
 Summary
 -------
 Congratulations! You have just written a web application and secured it with [Spring Security](http://static.springsource.org/spring-security/site/docs/3.2.x/reference/springsecurity-single.html). In this case, you used an [LDAP-based user store](http://static.springsource.org/spring-security/site/docs/3.2.x/reference/springsecurity-single.html#ldap).
+
+[u-application-context]: /understanding/application-context
 
