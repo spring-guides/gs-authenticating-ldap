@@ -1,8 +1,8 @@
-### Related Resources
+## Related resources
 
-There's more to application security than what is presented here. You may want to continue your exploration of Spring Security with the following
+There's more to application security than what is presented here. You can continue to explore Spring Security with the following resources.
 
-### Getting Started Guides
+### Getting Started guides
 
 * [Securing a Web Application][gs-securing-web]
 
@@ -14,7 +14,7 @@ There's more to application security than what is presented here. You may want t
 
 [tut-rest]: /guides/tutorials/rest
 
-### Understanding
+### Concepts and technologies
 
 * [REST][u-rest]
 * [JSON][u-json]
