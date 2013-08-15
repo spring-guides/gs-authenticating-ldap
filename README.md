@@ -26,13 +26,14 @@ To **start from scratch**, move on to [Set up the project](#scratch).
 
 To **skip the basics**, do the following:
 
- - [Download][zip] and unzip the source repository for this guide, or clone it using [git](/understanding/git):
+ - [Download][zip] and unzip the source repository for this guide, or clone it using [git][u-git]:
 `git clone https://github.com/springframework-meta/gs-authenticating-ldap.git`
  - cd into `gs-authenticating-ldap/initial`.
  - Jump ahead to [Creating a simple web controller](#initial).
 
 **When you're finished**, you can check your results against the code in `gs-authenticating-ldap/complete`.
 [zip]: https://github.com/springframework-meta/gs-authenticating-ldap/archive/master.zip
+[u-git]: /understanding/Git
 
 
 <a name="scratch"></a>
