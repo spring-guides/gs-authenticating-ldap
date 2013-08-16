@@ -24,9 +24,9 @@ Set up the project
 
 <@create_directory_structure_hello/>
 
-### Create a Maven POM
+### Create a Gradle build file
 
-    <@snippet path="pom.xml" prefix="initial"/>
+    <@snippet path="build.gradle" prefix="initial"/>
 
 <@bootstrap_starter_pom_disclaimer/>
 
@@ -51,9 +51,9 @@ Before you secure the web application, verify that it works. To do that, you nee
     <@snippet path="src/main/java/hello/Application.java" prefix="initial"/>
     
 <@build_an_executable_jar_subhead/>
-<@build_an_executable_jar/>
+<@build_an_executable_jar_with_gradle/>
 
-<@run_the_application_with_maven module="unsecured web application"/>
+<@run_the_application_with_gradle module="unsecured web application"/>
 
 If you open your browser and visit <http://localhost:8080>, you should see the following plain text:
 
@@ -101,7 +101,7 @@ Build and run the secured web application
 With Spring Security setup, you can now run the application in secured mode:
 
 ```sh
-$ mvn package spring-boot:run
+$ ./gradlew clean build && java -jar build/libs/${project_id}-0.1.0.jar
 ```
 
 If you visit the site at <http://localhost:8080>, you should be redirected to a login page provided by Spring Security.
