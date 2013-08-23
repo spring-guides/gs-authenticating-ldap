@@ -24,9 +24,8 @@ Set up the project
 
 <@create_directory_structure_hello/>
 
-### Create a Gradle build file
 
-    <@snippet path="build.gradle" prefix="initial"/>
+<@create_both_builds/>
 
 <@bootstrap_starter_pom_disclaimer/>
 
@@ -51,9 +50,9 @@ Before you secure the web application, verify that it works. To do that, you nee
     <@snippet path="src/main/java/hello/Application.java" prefix="initial"/>
     
 <@build_an_executable_jar_subhead/>
-<@build_an_executable_jar_with_gradle/>
+<@build_an_executable_jar_with_both/>
 
-<@run_the_application_with_gradle module="unsecured web application"/>
+<@run_the_application_with_both module="unsecured web application"/>
 
 If you open your browser and visit <http://localhost:8080>, you should see the following plain text:
 
