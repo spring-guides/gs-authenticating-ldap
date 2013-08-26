@@ -8,7 +8,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @ComponentScan
-@EnableWebMvc
 @EnableAutoConfiguration
 public class Application {
 

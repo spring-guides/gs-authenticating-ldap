@@ -142,7 +142,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @ComponentScan
-@EnableWebMvc
 @EnableAutoConfiguration
 public class Application {
 
@@ -223,79 +222,69 @@ Welcome to the home page!
 
 Set up Spring Security
 ----------------------------
-To configure Spring Security, you need an XML application context file, **application-context.xml**. To make the file easier to read, it is configured by default to use the `security` namespace.
+To configure Spring Security, you can use pure Java to configure things properly.
 
-`src/main/resources/application-context.xml`
-```xml
-<beans:beans xmlns="http://www.springframework.org/schema/security"
-  xmlns:beans="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans 
-           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-           http://www.springframework.org/schema/security
-           http://www.springframework.org/schema/security/spring-security-3.2.xsd">
-     
-    <ldap-server root="dc=springframework,dc=org" ldif="classpath:test-server.ldif" />
-
-    <authentication-manager>
-        <ldap-authentication-provider user-dn-pattern="uid={0},ou=people" 
-                                                group-search-base="ou=groups"/>
-    </authentication-manager>
-
-    <http auto-config="true">
-        <intercept-url pattern="/**" access="ROLE_DEVELOPERS" />
-    </http> 
-
-</beans:beans>
-```
-
-> **Note:** At the time of this writing, a Java-based version of Spring Security setup is still under development. That's why for now, this guide is using XML to configure the security parts.
-
-You also need an LDAP server. Spring Security's LDAP module includes an embedded server written in pure Java, which is being used for this guide. You can eventually replace the embedded LDAP server with a production-ready server by editing **application-context.xml** like this:
-
-```xml
-<ldap-server url="ldap://<your production server>:389/dc=springframework,dc=org" />
-```
-
-Next, you declare `<authentication-manager>` as the component that handles all authentication requests. In this setup, it contains an `<ldap-authentication-provider>`. It's configured to take a username, and insert it into `{0}` and look for `uid={0},ou=people,dc=springframework,dc=org`
-
-The `<http>` component declares a set of URL intercepts and other automatic components such as form authentication.
-
-Using an XML configuration inside a pure Java configuration
------------------------------------------------------------
-The Spring Security beans are defined in XML format inside **application-context.xml**, but your application is launched from a pure Java `Application` class. To combine them, edit your `Application` class like this:
-
-`src/main/java/hello/Application.java`
+`src/main/java/hello/WebSecurityConfig.java`
 ```java
+/*
+ * Copyright 2002-2013 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package hello;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.annotation.ComponentScan;
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-@ImportResource("classpath:application-context.xml")
-@ComponentScan
-@EnableWebMvc
-@EnableAutoConfiguration
-public class Application {
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+	// necessary to avoid https://jira.springsource.org/browse/SEC-2288
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+			.authorizeRequests()
+				.anyRequest().authenticated()
+				.and()
+			.formLogin();
+	}
 
+	@Override
+	protected void registerAuthentication(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
+		authManagerBuilder
+			.ldapAuthentication()
+				.userDnPatterns("uid={0},ou=people")
+				.groupSearchBase("ou=groups")
+				.contextSource()
+					.ldif("classpath:test-server.ldif");;
+	}
 }
 ```
+    
+The `@EnableWebSecurity` turns on a variety of beans needed to use Spring Security.
 
-`@ImportResource` pulls **application-context.xml** into the [application context][u-application-context] configuration.
+You also need an LDAP server. Spring Security's LDAP module includes an embedded server written in pure Java, which is being used for this guide. The `ldapAuthentication()` method configures things where the username at the login form is plugged into `{0}` such that it searches `uid={0},ou=people,dc=springframework,dc=org` in the LDAP server.
 
 Set up user data
 --------------------
-
-LDAP servers can use LDIF (LDAP Data Interchange Format) files to exchange user data. `<ldap-server>` inside **application-context.xml** is configured to pull in an LDIF data file using the **ldif** parameter. This makes it easy to pre-load demonstration data.
+LDAP servers can use LDIF (LDAP Data Interchange Format) files to exchange user data. The `ldif()` method inside `WebSecurityConfig` pulls in an LDIF data file. This makes it easy to pre-load demonstration data.
 
 `src/main/resources/test-server.ldif`
 ```ldif
@@ -427,15 +416,103 @@ uniqueMember: uid=ben,ou=people,dc=springframework,dc=org
     
 > **Note:** Using an LDIF file isn't standard configuration for a production system. However, it's very useful for testing purposes or guides.
 
-Build and run the secured web application
------------------------------------------
-With Spring Security setup, you can now run the application in secured mode:
+
+Create an Application class
+---------------------------
+
+`src/main/java/hello/Application.java`
+```java
+package hello;
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+@Configuration
+@ComponentScan
+@EnableAutoConfiguration
+public class Application {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+
+}
+```
+
+The `main()` method defers to the [`SpringApplication`][] helper class, providing `Application.class` as an argument to its `run()` method. This tells Spring to read the annotation metadata from `Application` and to manage it as a component in the [Spring application context][u-application-context].
+
+The `@ComponentScan` annotation tells Spring to search recursively through the `hello` package and its children for classes marked directly or indirectly with Spring's [`@Component`][] annotation. This directive ensures that Spring finds and registers the `WebSecurityConfig` class, because it is marked with `@Configuration`, which in turn is a kind of `@Component` annotation.
+
+The [`@EnableAsync`][] annotation switches on Spring's ability to run `@Async` methods in a background thread pool.
+
+The [`@EnableAutoConfiguration`][] annotation switches on reasonable default behaviors based on the content of your classpath. For example, it looks for any class that implements the `CommandLineRunner` interface and invokes its `run()` method. In this case, it runs the demo code for this guide.
+
+### Build an executable JAR
+Now that your `Application` class is ready, you simply instruct the build system to create a single, executable jar containing everything. This makes it easy to ship, version, and deploy the service as an application throughout the development lifecycle, across different environments, and so forth.
+
+Below are the Gradle steps, but if you are using Maven, you can find the updated pom.xml [right here](https://github.com/spring-guides/gs-authenticating-ldap/blob/master/complete/pom.xml) and build it by typing `mvn clean package`.
+
+Update your Gradle `build.gradle` file's `buildscript` section, so that it looks like this:
+
+```groovy
+buildscript {
+    repositories {
+        maven { url "http://repo.springsource.org/libs-snapshot" }
+        mavenLocal()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:0.5.0.BUILD-SNAPSHOT")
+    }
+}
+```
+
+Further down inside `build.gradle`, add the following to the list of applied plugins:
+
+```groovy
+apply plugin: 'spring-boot'
+```
+You can see the final version of `build.gradle` [right here]((https://github.com/spring-guides/gs-authenticating-ldap/blob/master/complete/build.gradle).
+
+The [Spring Boot gradle plugin][spring-boot-gradle-plugin] collects all the jars on the classpath and builds a single "über-jar", which makes it more convenient to execute and transport your service.
+It also searches for the `public static void main()` method to flag as a runnable class.
+
+Now run the following command to produce a single executable JAR file containing all necessary dependency classes and resources:
+
+```sh
+$ ./gradlew build
+```
+
+If you are using Gradle, you can run the JAR by typing:
+
+```sh
+$ java -jar build/libs/gs-authenticating-ldap-0.1.0.jar
+```
+
+If you are using Maven, you can run the JAR by typing:
+
+```sh
+$ java -jar target/gs-authenticating-ldap-0.1.0.jar
+```
+
+[spring-boot-gradle-plugin]: https://github.com/SpringSource/spring-boot/tree/master/spring-boot-tools/spring-boot-gradle-plugin
+
+> **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/convert-jar-to-war/) instead.
+
+Run the secured web application
+-------------------
+If you are using Gradle, you can run your secured web application at the command line this way:
 
 ```sh
 $ ./gradlew clean build && java -jar build/libs/gs-authenticating-ldap-0.1.0.jar
 ```
 
-If you visit the site at <http://localhost:8080>, you should be redirected to a login page provided by Spring Security.
+> **Note:** If you are using Maven, you can run your secured web application by typing `mvn clean package && java -jar target/gs-authenticating-ldap-0.1.0.jar`.
+
+
+If you visit the site at [http://localhost:8080](http://localhost:8080), you should be redirected to a login page provided by Spring Security.
 
 Enter username **ben** and password **benspassword**. You should see this message in your browser:
 
@@ -448,4 +525,7 @@ Summary
 Congratulations! You have just written a web application and secured it with [Spring Security](http://static.springsource.org/spring-security/site/docs/3.2.x/reference/springsecurity-single.html). In this case, you used an [LDAP-based user store](http://static.springsource.org/spring-security/site/docs/3.2.x/reference/springsecurity-single.html#ldap).
 
 [u-application-context]: /understanding/application-context
+[`SpringApplication`]: http://static.springsource.org/spring-bootstrap/docs/0.5.0.BUILD-SNAPSHOT/javadoc-api/org/springframework/bootstrap/SpringApplication.html
+[`@EnableAutoConfiguration`]: http://static.springsource.org/spring-bootstrap/docs/0.5.0.BUILD-SNAPSHOT/javadoc-api/org/springframework/bootstrap/context/annotation/SpringApplication.html
+[`@Component`]: http://static.springsource.org/spring/docs/current/javadoc-api/org/springframework/stereotype/Component.html
 

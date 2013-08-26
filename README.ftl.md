@@ -62,48 +62,42 @@ Welcome to the home page!
 
 Set up Spring Security
 ----------------------------
-To configure Spring Security, you need an XML application context file, **application-context.xml**. To make the file easier to read, it is configured by default to use the `security` namespace.
+To configure Spring Security, you can use pure Java to configure things properly.
 
-    <@snippet path="src/main/resources/application-context.xml" prefix="complete"/>
+    <@snippet path="src/main/java/hello/WebSecurityConfig.java" prefix="complete"/>
+    
+The `@EnableWebSecurity` turns on a variety of beans needed to use Spring Security.
 
-> **Note:** At the time of this writing, a Java-based version of Spring Security setup is still under development. That's why for now, this guide is using XML to configure the security parts.
-
-You also need an LDAP server. Spring Security's LDAP module includes an embedded server written in pure Java, which is being used for this guide. You can eventually replace the embedded LDAP server with a production-ready server by editing **application-context.xml** like this:
-
-```xml
-<ldap-server url="ldap://<your production server>:389/dc=springframework,dc=org" />
-```
-
-Next, you declare `<authentication-manager>` as the component that handles all authentication requests. In this setup, it contains an `<ldap-authentication-provider>`. It's configured to take a username, and insert it into `{0}` and look for `uid={0},ou=people,dc=springframework,dc=org`
-
-The `<http>` component declares a set of URL intercepts and other automatic components such as form authentication.
-
-Using an XML configuration inside a pure Java configuration
------------------------------------------------------------
-The Spring Security beans are defined in XML format inside **application-context.xml**, but your application is launched from a pure Java `Application` class. To combine them, edit your `Application` class like this:
-
-    <@snippet path="src/main/java/hello/Application.java" prefix="complete"/>
-
-`@ImportResource` pulls **application-context.xml** into the [application context][u-application-context] configuration.
+You also need an LDAP server. Spring Security's LDAP module includes an embedded server written in pure Java, which is being used for this guide. The `ldapAuthentication()` method configures things where the username at the login form is plugged into `{0}` such that it searches `uid={0},ou=people,dc=springframework,dc=org` in the LDAP server.
 
 Set up user data
 --------------------
-
-LDAP servers can use LDIF (LDAP Data Interchange Format) files to exchange user data. `<ldap-server>` inside **application-context.xml** is configured to pull in an LDIF data file using the **ldif** parameter. This makes it easy to pre-load demonstration data.
+LDAP servers can use LDIF (LDAP Data Interchange Format) files to exchange user data. The `ldif()` method inside `WebSecurityConfig` pulls in an LDIF data file. This makes it easy to pre-load demonstration data.
 
     <@snippet path="src/main/resources/test-server.ldif" prefix="complete"/>
     
 > **Note:** Using an LDIF file isn't standard configuration for a production system. However, it's very useful for testing purposes or guides.
 
-Build and run the secured web application
------------------------------------------
-With Spring Security setup, you can now run the application in secured mode:
 
-```sh
-$ ./gradlew clean build && java -jar build/libs/${project_id}-0.1.0.jar
-```
+Create an Application class
+---------------------------
 
-If you visit the site at <http://localhost:8080>, you should be redirected to a login page provided by Spring Security.
+    <@snippet path="src/main/java/hello/Application.java" prefix="complete"/>
+
+The `main()` method defers to the [`SpringApplication`][] helper class, providing `Application.class` as an argument to its `run()` method. This tells Spring to read the annotation metadata from `Application` and to manage it as a component in the [Spring application context][u-application-context].
+
+The `@ComponentScan` annotation tells Spring to search recursively through the `hello` package and its children for classes marked directly or indirectly with Spring's [`@Component`][] annotation. This directive ensures that Spring finds and registers the `WebSecurityConfig` class, because it is marked with `@Configuration`, which in turn is a kind of `@Component` annotation.
+
+The [`@EnableAsync`][] annotation switches on Spring's ability to run `@Async` methods in a background thread pool.
+
+The [`@EnableAutoConfiguration`][] annotation switches on reasonable default behaviors based on the content of your classpath. For example, it looks for any class that implements the `CommandLineRunner` interface and invokes its `run()` method. In this case, it runs the demo code for this guide.
+
+<@build_an_executable_jar_subhead/>
+<@build_an_executable_jar_with_both/>
+
+<@run_the_application_with_both module="secured web application"/>
+
+If you visit the site at [http://localhost:8080](http://localhost:8080), you should be redirected to a login page provided by Spring Security.
 
 Enter username **ben** and password **benspassword**. You should see this message in your browser:
 
@@ -116,4 +110,7 @@ Summary
 Congratulations! You have just written a web application and secured it with [Spring Security](http://static.springsource.org/spring-security/site/docs/3.2.x/reference/springsecurity-single.html). In this case, you used an [LDAP-based user store](http://static.springsource.org/spring-security/site/docs/3.2.x/reference/springsecurity-single.html#ldap).
 
 <@u_application_context/>
+[`SpringApplication`]: http://static.springsource.org/spring-bootstrap/docs/0.5.0.BUILD-SNAPSHOT/javadoc-api/org/springframework/bootstrap/SpringApplication.html
+[`@EnableAutoConfiguration`]: http://static.springsource.org/spring-bootstrap/docs/0.5.0.BUILD-SNAPSHOT/javadoc-api/org/springframework/bootstrap/context/annotation/SpringApplication.html
+[`@Component`]: http://static.springsource.org/spring/docs/current/javadoc-api/org/springframework/stereotype/Component.html
 
