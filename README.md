@@ -1,5 +1,5 @@
 
-This guide walks you through the process creating an application and securing it with the [Spring Security](http://static.springsource.org/spring-security/site/index.html) LDAP module.
+This guide walks you through the process creating an application and securing it with the [Spring Security](http://projects.spring.io/spring-security/) LDAP module.
 
 What you'll build
 -----------------
@@ -522,7 +522,7 @@ Welcome to the home page!
 
 Summary
 -------
-Congratulations! You have just written a web application and secured it with [Spring Security](http://static.springsource.org/spring-security/site/docs/3.2.x/reference/springsecurity-single.html). In this case, you used an [LDAP-based user store](http://static.springsource.org/spring-security/site/docs/3.2.x/reference/springsecurity-single.html#ldap).
+Congratulations! You have just written a web application and secured it with [Spring Security](http://docs.spring.io/spring-security/site/docs/3.2.x/reference/html/). In this case, you used an [LDAP-based user store](http://docs.spring.io/spring-security/site/docs/3.2.x/reference/html/ldap.html).
 
 [u-application-context]: /understanding/application-context
 [`SpringApplication`]: http://docs.spring.io/spring-boot/docs/0.5.0.M3/api/org/springframework/boot/SpringApplication.html
