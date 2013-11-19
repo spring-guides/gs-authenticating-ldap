@@ -12,6 +12,8 @@ What you'll need
 
  - About 15 minutes
  - <@prereq_editor_jdk_buildtools/>
+ 
+> **Note:** This guide does NOT run with Java 8 at this time.
 
 ## <@how_to_complete_this_guide jump_ahead='Creating a simple web controller'/>
 

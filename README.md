@@ -19,6 +19,8 @@ What you'll need
 [gradle]: http://www.gradle.org/
 [mvn]: http://maven.apache.org/download.cgi
 [gs-sts]: /guides/gs/sts
+ 
+> **Note:** This guide does NOT run with Java 8 at this time.
 
 How to complete this guide
 --------------------------
