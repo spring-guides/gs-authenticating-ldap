@@ -82,9 +82,9 @@ repositories {
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web:0.5.0.M5")
-    compile("org.springframework.boot:spring-boot-starter-security:0.5.0.M5")
-    compile("org.springframework.security:spring-security-ldap:3.1.3.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-web:0.5.0.M6")
+    compile("org.springframework.boot:spring-boot-starter-security:0.5.0.M6")
+    compile("org.springframework.security:spring-security-ldap:3.2.0.RC1")
     compile("org.apache.directory.server:apacheds-server-jndi:1.5.5")
     testCompile("junit:junit:4.11")
 }
@@ -167,7 +167,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:0.5.0.M4")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:0.5.0.M6")
     }
 }
 ```
@@ -239,13 +239,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
-	protected void registerAuthentication(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
+	protected void configure(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
 		authManagerBuilder
 			.ldapAuthentication()
 				.userDnPatterns("uid={0},ou=people")
 				.groupSearchBase("ou=groups")
 				.contextSource()
-					.ldif("classpath:test-server.ldif");;
+					.ldif("classpath:test-server.ldif");
 	}
 }
 ```
@@ -435,7 +435,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:0.5.0.M4")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:0.5.0.M6")
     }
 }
 ```

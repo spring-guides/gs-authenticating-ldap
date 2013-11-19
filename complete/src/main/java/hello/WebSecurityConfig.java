@@ -10,12 +10,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
-	protected void registerAuthentication(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
+	protected void configure(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
 		authManagerBuilder
 			.ldapAuthentication()
 				.userDnPatterns("uid={0},ou=people")
 				.groupSearchBase("ou=groups")
 				.contextSource()
-					.ldif("classpath:test-server.ldif");;
+					.ldif("classpath:test-server.ldif");
 	}
 }
