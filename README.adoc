@@ -23,7 +23,6 @@ include::https://raw.github.com/spring-guides/getting-started-macros/master/prer
  
 NOTE: This guide does NOT run with Java 8 at this time.
 
-:jump_ahead: Creating a simple web controller
 include::https://raw.github.com/spring-guides/getting-started-macros/master/how_to_complete_this_guide.adoc[]
 
 
