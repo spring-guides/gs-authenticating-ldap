@@ -1,5 +1,5 @@
 //TODO: Go a global search and replace to fix {`@Component`} and then replace with {Component} (after fixing the link itself)
-:Component: http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/stereotype/Component.html
+:Component: http://docs.spring.io/spring/docs/4.0.0.RC1/javadoc-api/org/springframework/stereotype/Component.html
 //TODO: Go a global search and replace to fix {`@EnableAutoConfiguration`} and then replace with {EnableAutoConfiguration} (after fixing the link itself)
 :EnableAutoConfiguration: http://docs.spring.io/spring-boot/docs/{spring_boot_version}/api/org/springframework/boot/autoconfigure/EnableAutoConfiguration.html
 //TODO: Go a global search and replace to fix {`SpringApplication`} and then replace with {SpringApplication} (after fixing the link itself)
