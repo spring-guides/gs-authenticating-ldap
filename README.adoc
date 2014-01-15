@@ -1,3 +1,7 @@
+---
+tags: [security, ldap]
+projects: [spring-security, spring-ldap]
+---
 :spring_version: 4.0.0.RC1
 //TODO: Go a global search and replace to fix {`@Component`} and then replace with {Component} (after fixing the link itself)
 :Component: http://docs.spring.io/spring/docs/{spring_version}/javadoc-api/org/springframework/stereotype/Component.html
