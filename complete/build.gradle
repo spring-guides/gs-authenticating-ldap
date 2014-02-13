@@ -4,7 +4,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.0.0.RC1")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.0.0.RC2")
     }
 }
 
@@ -24,11 +24,11 @@ repositories {
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web:1.0.0.RC1")
-    compile("org.springframework.boot:spring-boot-starter-security:1.0.0.RC1")
+    compile("org.springframework.boot:spring-boot-starter-web:1.0.0.RC2")
+    compile("org.springframework.boot:spring-boot-starter-security:1.0.0.RC2")
     compile("org.springframework.security:spring-security-ldap:3.2.0.RC1")
     compile("org.apache.directory.server:apacheds-server-jndi:1.5.5")
-    testCompile("junit:junit:4.11")
+    testCompile("junit:junit")
 }
 
 task wrapper(type: Wrapper) {
