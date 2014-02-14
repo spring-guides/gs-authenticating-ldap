@@ -2,7 +2,7 @@
 tags: [security, ldap]
 projects: [spring-security, spring-ldap]
 ---
-:spring_version: 4.0.0.RC1
+:spring_version: current
 //TODO: Go a global search and replace to fix {`@Component`} and then replace with {Component} (after fixing the link itself)
 :Component: http://docs.spring.io/spring/docs/{spring_version}/javadoc-api/org/springframework/stereotype/Component.html
 //TODO: Go a global search and replace to fix {`@EnableAutoConfiguration`} and then replace with {EnableAutoConfiguration} (after fixing the link itself)
