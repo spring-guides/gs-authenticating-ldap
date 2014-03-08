@@ -3,14 +3,9 @@ tags: [security, ldap]
 projects: [spring-security, spring-ldap]
 ---
 :spring_version: current
-//TODO: Go a global search and replace to fix {`@Component`} and then replace with {Component} (after fixing the link itself)
 :Component: http://docs.spring.io/spring/docs/{spring_version}/javadoc-api/org/springframework/stereotype/Component.html
-//TODO: Go a global search and replace to fix {`@EnableAutoConfiguration`} and then replace with {EnableAutoConfiguration} (after fixing the link itself)
 :EnableAutoConfiguration: http://docs.spring.io/spring-boot/docs/{spring_boot_version}/api/org/springframework/boot/autoconfigure/EnableAutoConfiguration.html
-//TODO: Go a global search and replace to fix {`SpringApplication`} and then replace with {SpringApplication} (after fixing the link itself)
 :SpringApplication: http://docs.spring.io/spring-boot/docs/{spring_boot_version}/api/org/springframework/boot/SpringApplication.html
-//TODO: Go a global search and replace to fix {`@EnableAsync`} and then replace with {EnableAsync} (after fixing the link itself)
-:EnableAsync: http://docs.spring.io/spring/docs/current/spring-framework-reference/html/scheduling.html#scheduling-annotation-support
 :toc:
 :icons: font
 :source-highlighter: prettify
@@ -84,9 +79,9 @@ include::https://raw.github.com/spring-guides/getting-started-macros/master/run_
 
 If you open your browser and visit http://localhost:8080, you should see the following plain text:
 
----- +TODO: If this is an output, replace with .'s+
+....
 Welcome to the home page!
----- +TODO: If this is an output, replace with .'s+
+....
 
 == Set up Spring Security
 To configure Spring Security, you can use pure Java to configure things properly.
@@ -125,8 +120,6 @@ The `main()` method defers to the {SpringApplication}[`SpringApplication`] helpe
 
 The `@ComponentScan` annotation tells Spring to search recursively through the `hello` package and its children for classes marked directly or indirectly with Spring's {Component}[`@Component`] annotation. This directive ensures that Spring finds and registers the `WebSecurityConfig` class, because it is marked with `@Configuration`, which in turn is a kind of `@Component` annotation.
 
-The {EnableAsync}[`@EnableAsync`] annotation switches on Spring's ability to run `@Async` methods in a background thread pool.
-
 The {EnableAutoConfiguration}[`@EnableAutoConfiguration`] annotation switches on reasonable default behaviors based on the content of your classpath. For example, it looks for any class that implements the `CommandLineRunner` interface and invokes its `run()` method. In this case, it runs the demo code for this guide.
 
 include::https://raw.github.com/spring-guides/getting-started-macros/master/build_an_executable_jar_subhead.adoc[]
@@ -139,9 +132,9 @@ If you visit the site at [http://localhost:8080](http://localhost:8080), you sho
 
 Enter username **ben** and password **benspassword**. You should see this message in your browser:
 
----- +TODO: If this is an output, replace with .'s+
+....
 Welcome to the home page!
----- +TODO: If this is an output, replace with .'s+
+....
 
 == Summary
 Congratulations! You have just written a web application and secured it with http://docs.spring.io/spring-security/site/docs/3.2.x/reference/html/[Spring Security]. In this case, you used an [LDAP-based user store](http://docs.spring.io/spring-security/site/docs/3.2.x/reference/html/ldap.html).
