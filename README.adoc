@@ -128,7 +128,7 @@ include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/
 :module: secured web application
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/run_the_application_with_both.adoc[]
 
-If you visit the site at [http://localhost:8080](http://localhost:8080), you should be redirected to a login page provided by Spring Security.
+If you visit the site at http://localhost:8080, you should be redirected to a login page provided by Spring Security.
 
 Enter username **ben** and password **benspassword**. You should see this message in your browser:
 
