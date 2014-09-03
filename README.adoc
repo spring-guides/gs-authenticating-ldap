@@ -72,7 +72,25 @@ Welcome to the home page!
 ....
 
 == Set up Spring Security
-To configure Spring Security, you can use pure Java to configure things properly.
+To configure Spring Security, you first need to add some extra dependencies to your build.
+
+For a Gradle-based build:
+
+`build.gradle`
+[source,java]
+----
+include::complete/build.gradle[tag=security,indent=0]
+----
+
+For a Maven-based build:
+
+`pom.xml`
+[source,xml]
+----
+include::complete/pom.xml[tag=security,indent=0]
+----
+
+These dependencies add Spring Security and ApacheDS, an open source LDAP server. With that in place, you can then use pure Java to configure your security policy.
 
 `src/main/java/hello/WebSecurityConfig.java`
 [source,java]

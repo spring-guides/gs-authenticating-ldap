@@ -25,6 +25,7 @@ repositories {
     maven { url "http://repo.spring.io/libs-release" }
 }
 
+// tag::security[]
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-security")
@@ -32,6 +33,7 @@ dependencies {
     compile("org.apache.directory.server:apacheds-server-jndi:1.5.5")
     testCompile("junit:junit")
 }
+// end::security[]
 
 task wrapper(type: Wrapper) {
     gradleVersion = '1.11'
