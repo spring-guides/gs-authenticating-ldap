@@ -19,8 +19,6 @@ You'll build a simple web application that is secured by Spring Security's embed
 
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/prereq_editor_jdk_buildtools.adoc[]
  
-NOTE: This guide does NOT run with Java 8 at this time.
-
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/how_to_complete_this_guide.adoc[]
 
 
@@ -29,8 +27,6 @@ include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/hide-show-maven.adoc[]
 
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/hide-show-sts.adoc[]
-
-
 
 [[initial]]
 == Create a simple web controller
@@ -42,11 +38,11 @@ In Spring, REST endpoints are just Spring MVC controllers. The following Spring 
 include::complete/src/main/java/hello/HomeController.java[]
 ----
     
-The entire class is marked up with `@Controller` so Spring MVC can autodetect the controller using it's built-in scanning features and automatically configure web routes.
+The entire class is marked up with `@RestController` so Spring MVC can autodetect the controller using it's built-in scanning features and automatically configure web routes.
 
 The method is tagged with `@RequestMapping` to flag the path and the REST action. In this case, `GET` is the default behavior; it returns a message indicating that you are on the home page. 
 
-`@ResponseBody` tells Spring MVC to write the text directly into the HTTP response body, because there aren't any views. Instead, when you visit the page, you'll get a simple message in the browser as the focus of this guide is securing the page with LDAP.
+`@RestController` also tells Spring MVC to write the text directly into the HTTP response body, because there aren't any views. Instead, when you visit the page, you'll get a simple message in the browser as the focus of this guide is securing the page with LDAP.
 
 == Build the unsecured web application
 Before you secure the web application, verify that it works. To do that, you need to define some key beans. To do that, create an `Application` class.
@@ -85,6 +81,8 @@ For a Gradle-based build:
 ----
 include::complete/build.gradle[tag=security,indent=0]
 ----
+
+NOTE: Due to a artifact resolution issue with Gradle, *spring-tx* must be pulled in or Gradle will fetch an older one that doesn't work.
 
 For a Maven-based build:
 
