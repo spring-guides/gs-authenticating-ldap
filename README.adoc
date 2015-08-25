@@ -151,3 +151,6 @@ Welcome to the home page!
 Congratulations! You have just written a web application and secured it with http://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/[Spring Security]. In this case, you used an http://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#ldap[LDAP-based user store].
 
 
+
+include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/footer.adoc[]
+
