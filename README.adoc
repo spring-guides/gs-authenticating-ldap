@@ -45,6 +45,8 @@ The method is tagged with `@RequestMapping` to flag the path and the REST action
 
 `@RestController` also tells Spring MVC to write the text directly into the HTTP response body, because there aren't any views. Instead, when you visit the page, you'll get a simple message in the browser as the focus of this guide is securing the page with LDAP.
 
+It is also possible to inject a `Principle` object containing details of the logged-in user.
+
 == Build the unsecured web application
 Before you secure the web application, verify that it works. To do that, you need to define some key beans. To do that, create an `Application` class.
 
@@ -145,6 +147,12 @@ Enter username **ben** and password **benspassword**. You should see this messag
 
 ....
 Welcome to the home page!
+....
+
+Change the URL in your browser's address bar to http://localhost:8080/home, and you'll get a more personal message:
+
+....
+Welcome to your home page, ben!
 ....
 
 == Summary
