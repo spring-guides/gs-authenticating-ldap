@@ -21,10 +21,10 @@ repositories {
     mavenCentral()
 }
 
-// tag::security[]
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+// tag::security[]
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-security")
