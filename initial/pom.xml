@@ -17,12 +17,27 @@
         <java.version>1.8</java.version>
     </properties>
 
+    <!-- tag::security[] -->
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-ldap</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.directory.server</groupId>
+            <artifactId>apacheds-server-jndi</artifactId>
+            <version>1.5.5</version>
+        </dependency>
     </dependencies>
+    <!-- end::security[] -->
 
     <build>
         <plugins>
@@ -32,5 +47,6 @@
             </plugin>
         </plugins>
     </build>
-        
+
+
 </project>

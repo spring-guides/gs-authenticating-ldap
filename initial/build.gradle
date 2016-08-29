@@ -24,10 +24,16 @@ repositories {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+// tag::security[]
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.security:spring-security-ldap")
+    compile("org.springframework:spring-tx")
+    compile("org.apache.directory.server:apacheds-server-jndi:1.5.5")
     testCompile("junit:junit")
 }
+// end::security[]
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
