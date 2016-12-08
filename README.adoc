@@ -52,7 +52,7 @@ Before you secure the web application, verify that it works. To do that, you nee
 `src/main/java/hello/Application.java`
 [source,java]
 ----
-include::initial/src/main/java/hello/Application.java[]
+include::complete/src/main/java/hello/Application.java[]
 ----
     
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/spring-boot-application.adoc[]
