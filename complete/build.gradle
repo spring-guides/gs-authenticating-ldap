@@ -28,9 +28,10 @@ targetCompatibility = 1.8
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.ldap:spring-ldap-core")
     compile("org.springframework.security:spring-security-ldap")
     compile("org.springframework:spring-tx")
-    compile("org.apache.directory.server:apacheds-server-jndi:1.5.5")
+    compile("com.unboundid:unboundid-ldapsdk")
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("org.springframework.security:spring-security-test")
 }

@@ -87,7 +87,7 @@ For a Maven-based build:
 include::complete/pom.xml[tag=security,indent=0]
 ----
 
-These dependencies add Spring Security and ApacheDS, an open source LDAP server. With that in place, you can then use pure Java to configure your security policy.
+These dependencies add Spring Security and UnboundId, an open source LDAP server. With that in place, you can then use pure Java to configure your security policy.
 
 `src/main/java/hello/WebSecurityConfig.java`
 [source,java]
@@ -97,10 +97,10 @@ include::complete/src/main/java/hello/WebSecurityConfig.java[]
     
 The `@EnableWebSecurity` turns on a variety of beans needed to use Spring Security.
 
-You also need an LDAP server. Spring Security's LDAP module includes an embedded server written in pure Java, which is being used for this guide. The `ldapAuthentication()` method configures things where the username at the login form is plugged into `{0}` such that it searches `uid={0},ou=people,dc=springframework,dc=org` in the LDAP server.
+You also need an LDAP server. Spring Boot's provides autoconfiguration for an embedded server written in pure Java, which is being used for this guide. The `ldapAuthentication()` method configures things where the username at the login form is plugged into `{0}` such that it searches `uid={0},ou=people,dc=springframework,dc=org` in the LDAP server. Also, the `passwordCompare()` method configures the encoder and the name of the password's attribute.
 
 == Set up user data
-LDAP servers can use LDIF (LDAP Data Interchange Format) files to exchange user data. The `ldif()` method inside `WebSecurityConfig` pulls in an LDIF data file. This makes it easy to pre-load demonstration data.
+LDAP servers can use LDIF (LDAP Data Interchange Format) files to exchange user data. The `spring.ldap.embedded.ldif` property inside `application.properties` allow to Spring Boot pulls in an LDIF data file. This makes it easy to pre-load demonstration data.
 
 `src/main/resources/test-server.ldif`
 [source,ldif]

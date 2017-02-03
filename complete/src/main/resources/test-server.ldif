@@ -1,3 +1,9 @@
+dn: dc=springframework,dc=org
+objectclass: top
+objectclass: domain
+objectclass: extensibleObject
+dc: springframework
+
 dn: ou=groups,dc=springframework,dc=org
 objectclass: top
 objectclass: organizationalUnit
@@ -102,7 +108,7 @@ userPassword: spacecadetspassword
 
 dn: cn=developers,ou=groups,dc=springframework,dc=org
 objectclass: top
-objectclass: groupOfNames
+objectclass: groupOfUniqueNames
 cn: developers
 ou: developer
 uniqueMember: uid=ben,ou=people,dc=springframework,dc=org
@@ -110,7 +116,7 @@ uniqueMember: uid=bob,ou=people,dc=springframework,dc=org
 
 dn: cn=managers,ou=groups,dc=springframework,dc=org
 objectclass: top
-objectclass: groupOfNames
+objectclass: groupOfUniqueNames
 cn: managers
 ou: manager
 uniqueMember: uid=ben,ou=people,dc=springframework,dc=org
@@ -118,7 +124,7 @@ uniqueMember: cn=mouse\, jerry,ou=people,dc=springframework,dc=org
 
 dn: cn=submanagers,ou=subgroups,ou=groups,dc=springframework,dc=org
 objectclass: top
-objectclass: groupOfNames
+objectclass: groupOfUniqueNames
 cn: submanagers
 ou: submanager
 uniqueMember: uid=ben,ou=people,dc=springframework,dc=org
