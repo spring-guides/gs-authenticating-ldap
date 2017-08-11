@@ -126,7 +126,7 @@ Congratulations! You have just written a web application and secured it with htt
 
 == See Also
 
-The following guides may also be helpful:
+The following guide may also be helpful:
 
 * https://spring.io/guides/gs/spring-boot/[Building an Application with Spring Boot]
 
