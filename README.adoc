@@ -19,7 +19,7 @@ You'll build a simple web application that is secured by Spring Security's embed
 
 :java_version: 1.8
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/prereq_editor_jdk_buildtools.adoc[]
- 
+
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/how_to_complete_this_guide.adoc[]
 
 
@@ -38,10 +38,10 @@ In Spring, REST endpoints are just Spring MVC controllers. The following Spring 
 ----
 include::complete/src/main/java/hello/HomeController.java[]
 ----
-    
+
 The entire class is marked up with `@RestController` so Spring MVC can autodetect the controller using it's built-in scanning features and automatically configure web routes.
 
-The method is tagged with `@RequestMapping` to flag the path and the REST action. In this case, `GET` is the default behavior; it returns a message indicating that you are on the home page. 
+The method is tagged with `@RequestMapping` to flag the path and the REST action. In this case, `GET` is the default behavior; it returns a message indicating that you are on the home page.
 
 `@RestController` also tells Spring MVC to write the text directly into the HTTP response body, because there aren't any views. Instead, when you visit the page, you'll get a simple message in the browser as the focus of this guide is securing the page with LDAP.
 
@@ -54,7 +54,7 @@ Before you secure the web application, verify that it works. To do that, you nee
 ----
 include::complete/src/main/java/hello/Application.java[]
 ----
-    
+
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/spring-boot-application.adoc[]
 
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/build_an_executable_jar_subhead.adoc[]
@@ -94,7 +94,7 @@ These dependencies add Spring Security and UnboundId, an open source LDAP server
 ----
 include::complete/src/main/java/hello/WebSecurityConfig.java[]
 ----
-    
+
 The `@EnableWebSecurity` turns on a variety of beans needed to use Spring Security.
 
 You also need an LDAP server. Spring Boot's provides autoconfiguration for an embedded server written in pure Java, which is being used for this guide. The `ldapAuthentication()` method configures things where the username at the login form is plugged into `{0}` such that it searches `uid={0},ou=people,dc=springframework,dc=org` in the LDAP server. Also, the `passwordCompare()` method configures the encoder and the name of the password's attribute.
@@ -107,7 +107,7 @@ LDAP servers can use LDIF (LDAP Data Interchange Format) files to exchange user 
 ----
 include::complete/src/main/resources/test-server.ldif[]
 ----
-    
+
 NOTE: Using an LDIF file isn't standard configuration for a production system. However, it's very useful for testing purposes or guides.
 
 :module: secured web application
@@ -124,7 +124,10 @@ Welcome to the home page!
 
 Congratulations! You have just written a web application and secured it with http://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/[Spring Security]. In this case, you used an http://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#ldap[LDAP-based user store].
 
+== See Also
 
+The following guide may also be helpful:
+
+* https://spring.io/guides/gs/spring-boot/[Building an Application with Spring Boot]
 
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/footer.adoc[]
-
