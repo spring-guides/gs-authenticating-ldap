@@ -1,7 +1,3 @@
----
-tags: [security, ldap]
-projects: [spring-security, spring-ldap]
----
 :spring_version: current
 :SpringApplication: http://docs.spring.io/spring-boot/docs/{spring_boot_version}/api/org/springframework/boot/SpringApplication.html
 :toc:
