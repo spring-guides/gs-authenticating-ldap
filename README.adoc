@@ -1,11 +1,11 @@
 :spring_version: current
-:SpringApplication: http://docs.spring.io/spring-boot/docs/{spring_boot_version}/api/org/springframework/boot/SpringApplication.html
+:SpringApplication: https://docs.spring.io/spring-boot/docs/{spring_boot_version}/api/org/springframework/boot/SpringApplication.html
 :toc:
 :icons: font
 :source-highlighter: prettify
 :project_id: gs-authenticating-ldap
 
-This guide walks you through the process creating an application and securing it with the http://projects.spring.io/spring-security/[Spring Security] LDAP module.
+This guide walks you through the process creating an application and securing it with the https://projects.spring.io/spring-security/[Spring Security] LDAP module.
 
 == What you'll build
 
@@ -118,7 +118,7 @@ Welcome to the home page!
 
 == Summary
 
-Congratulations! You have just written a web application and secured it with http://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/[Spring Security]. In this case, you used an http://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#ldap[LDAP-based user store].
+Congratulations! You have just written a web application and secured it with https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/[Spring Security]. In this case, you used an https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#ldap[LDAP-based user store].
 
 == See Also
 
