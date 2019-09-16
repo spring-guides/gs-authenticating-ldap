@@ -1,4 +1,4 @@
-package hello;
+package com.example.authenticatingldap;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
