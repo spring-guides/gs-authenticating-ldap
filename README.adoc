@@ -89,7 +89,7 @@ that class:
 ====
 [source,java]
 ----
-include::complete/src/main/java/com/example/authenticatingldap/Application.java[]
+include::complete/src/main/java/com/example/authenticatingldap/AuthenticatingLdapApplication.java[]
 ----
 ====
 
