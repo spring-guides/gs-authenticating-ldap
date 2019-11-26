@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      https://www.apache.org/licenses/LICENSE-2.0
+ *	  https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,26 +35,26 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class ApplicationTests {
-    @Autowired
-    private MockMvc mockMvc;
+	@Autowired
+	private MockMvc mockMvc;
 
-    @Test
-    public void loginWithValidUserThenAuthenticated() throws Exception {
-        FormLoginRequestBuilder login = formLogin()
-            .user("ben")
-            .password("benspassword");
+	@Test
+	public void loginWithValidUserThenAuthenticated() throws Exception {
+		FormLoginRequestBuilder login = formLogin()
+			.user("ben")
+			.password("benspassword");
 
-        mockMvc.perform(login)
-            .andExpect(authenticated().withUsername("ben"));
-    }
+		mockMvc.perform(login)
+			.andExpect(authenticated().withUsername("ben"));
+	}
 
-    @Test
-    public void loginWithInvalidUserThenUnauthenticated() throws Exception {
-        FormLoginRequestBuilder login = formLogin()
-            .user("invalid")
-            .password("invalidpassword");
+	@Test
+	public void loginWithInvalidUserThenUnauthenticated() throws Exception {
+		FormLoginRequestBuilder login = formLogin()
+			.user("invalid")
+			.password("invalidpassword");
 
-        mockMvc.perform(login)
-            .andExpect(unauthenticated());
-    }
+		mockMvc.perform(login)
+			.andExpect(unauthenticated());
+	}
 }

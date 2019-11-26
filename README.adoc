@@ -65,7 +65,7 @@ In Spring, REST endpoints are Spring MVC controllers. The following Spring MVC c
 `GET /` request by returning a simple message:
 
 ====
-[source,java]
+[source,java,tabsize=2]
 ----
 include::initial/src/main/java/com/example/authenticatingldap/HomeController.java[]
 ----
@@ -88,7 +88,7 @@ following listing (from
 that class:
 
 ====
-[source,java]
+[source,java,tabsize=2]
 ----
 include::complete/src/main/java/com/example/authenticatingldap/AuthenticatingLdapApplication.java[]
 ----
@@ -116,7 +116,7 @@ To configure Spring Security, you first need to add some extra dependencies to y
 For a Gradle-based build, add the following dependencies to the `build.gradle` file:
 
 ====
-[source,java]
+[source,java,tabsize=2]
 ----
 include::complete/build.gradle[tag=security,indent=0]
 ----
@@ -140,7 +140,7 @@ as the following example (from
 `src/main/java/com/example/authenticatingldap/WebSecurityConfig.java`) shows:
 
 ====
-[source,java]
+[source,java,tabsize=2]
 ----
 include::complete/src/main/java/com/example/authenticatingldap/WebSecurityConfig.java[]
 ----
