@@ -26,7 +26,7 @@ Initializr]. The Initializr offers a fast way to pull in all the dependencies yo
 an application and does a lot of the set up for you. This example needs only the Spring
 Web dependency.
 
-NOTE: Because point of this guide is to secure and unsecured web application, you will
+NOTE: Because the point of this guide is to secure an unsecured web application, you will
 first build an unsecured web application and, later in the guide, add more dependencies
 for the Spring Security and LDAP features.
 
