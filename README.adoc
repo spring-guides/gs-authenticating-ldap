@@ -146,8 +146,8 @@ include::complete/src/main/java/com/example/authenticatingldap/WebSecurityConfig
 ----
 ====
 
-The `@EnableWebSecurity` annotation turns on a variety of beans that you need to use
-Spring Security.
+To customize the security settings you use a `WebSecurityConfigurer`. In the above example this is
+done by overriding the methods of `WebSecurityConfigurerAdapter` which implements the `WebSecurityConfigurer` interface.
 
 You also need an LDAP server. Spring Boot provides auto-configuration for an embedded
 server written in pure Java, which is being used for this guide. The
