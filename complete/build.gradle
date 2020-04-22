@@ -14,11 +14,13 @@ repositories {
 
 dependencies {
 compile("org.springframework.boot:spring-boot-starter-web")
+// tag::security[]
 compile("org.springframework.boot:spring-boot-starter-security")
 compile("org.springframework.ldap:spring-ldap-core")
 compile("org.springframework.security:spring-security-ldap")
-compile("org.springframework:spring-tx")
 compile("com.unboundid:unboundid-ldapsdk")
+// end::security[]
+compile("org.springframework:spring-tx")
 testCompile("org.springframework.security:spring-security-test")
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
