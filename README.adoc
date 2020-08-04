@@ -30,15 +30,6 @@ NOTE: Because the point of this guide is to secure an unsecured web application,
 first build an unsecured web application and, later in the guide, add more dependencies
 for the Spring Security and LDAP features.
 
-The following image shows the Initializr set up for this sample project:
-
-image::images/initializr.png[]
-
-NOTE: The preceding image shows the Initializr with Maven chosen as the build tool. You
-can also use Gradle. It also shows values of `com.example` and
-`authenticating-ldap` as the Group and Artifact, respectively. You will use those
-values throughout the rest of this sample.
-
 The following listing shows the `pom.xml` file created when you choose Maven:
 
 ====
