@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.4.3'
+	id 'org.springframework.boot' version '2.5.2'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 }
@@ -15,13 +15,13 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	// tag::security[]
-	compile("org.springframework.boot:spring-boot-starter-security")
-	compile("org.springframework.ldap:spring-ldap-core")
-	compile("org.springframework.security:spring-security-ldap")
-	compile("com.unboundid:unboundid-ldapsdk")
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.ldap:spring-ldap-core")
+	implementation("org.springframework.security:spring-security-ldap")
+	implementation("com.unboundid:unboundid-ldapsdk")
 	// end::security[]
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testCompile("org.springframework.security:spring-security-test")
+	testImplementation("org.springframework.security:spring-security-test")
 }
 
 test {
