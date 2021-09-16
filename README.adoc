@@ -25,31 +25,7 @@ NOTE: Because the point of this guide is to secure an unsecured web application,
 first build an unsecured web application and, later in the guide, add more dependencies
 for the Spring Security and LDAP features.
 
-If you use Maven, visit the https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.4.3.RELEASE&packaging=jar&jvmVersion=1.8&groupId=com.example&artifactId=authenticating-ldap&name=authenticating-ldap&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.authenticating-ldap&dependencies=web[Spring Initializr] to generate a new project with the required dependency (Spring Web).
-
-The following listing shows the `pom.xml` file created when you choose Maven:
-
-====
-[src,xml]
-----
-include::initial/pom.xml[]
-----
-====
-
-If you use Gradle, visit the https://start.spring.io/#!type=gradle-project&language=java&platformVersion=2.4.3.RELEASE&packaging=jar&jvmVersion=1.8&groupId=com.example&artifactId=authenticating-ldap&name=authenticating-ldap&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.authenticating-ldap&dependencies=web[Spring Initializr] to generate a new project with the required dependency (Spring Web).
-
-The following listing shows the `build.gradle` file created when you choose Gradle:
-
-====
-[src,groovy]
-----
-include::initial/build.gradle[]
-----
-====
-
-=== Manual Initialization (optional)
-
-If you want to initialize the project manually rather than use the links shown earlier, follow the steps given below:
+To initialize the project:
 
 . Navigate to https://start.spring.io.
 This service pulls in all the dependencies you need for an application and does most of the setup for you.
@@ -59,6 +35,8 @@ This service pulls in all the dependencies you need for an application and does 
 . Download the resulting ZIP file, which is an archive of a web application that is configured with your choices.
 
 NOTE: If your IDE has the Spring Initializr integration, you can complete this process from your IDE.
+
+NOTE: You can also fork the project from Github and open it in your IDE or other editor.
 
 [[initial]]
 == Create a Simple Web Controller
