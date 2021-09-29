@@ -25,7 +25,9 @@ NOTE: Because the point of this guide is to secure an unsecured web application,
 first build an unsecured web application and, later in the guide, add more dependencies
 for the Spring Security and LDAP features.
 
-To initialize the project:
+You can use this https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.5.5&packaging=jar&jvmVersion=11&groupId=com.example&artifactId=authenticating-ldap&name=authenticating-ldap&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.authenticating-ldap&dependencies=web[pre-initialized project] and click Generate to download a ZIP file. This project is configured to fit the examples in this tutorial.
+
+To manually initialize the project:
 
 . Navigate to https://start.spring.io.
 This service pulls in all the dependencies you need for an application and does most of the setup for you.
