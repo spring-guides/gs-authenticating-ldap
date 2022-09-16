@@ -1,8 +1,3 @@
-dn: dc=springframework,dc=org
-objectclass: top
-objectclass: domain
-objectclass: extensibleObject
-dc: springframework
 
 dn: ou=groups,dc=springframework,dc=org
 objectclass: top
