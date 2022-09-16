@@ -125,12 +125,11 @@ as the following example (from
 ====
 [source,java,tabsize=2]
 ----
-include::complete/src/main/java/com/example/authenticatingldap/WebSecurityConfig.java[]
+include::complete/src/main/java/com/example/authenticatingldap/SecurityConfiguration.java[]
 ----
 ====
 
-To customize the security settings you use a `WebSecurityConfigurer`. In the above example this is
-done by overriding the methods of `WebSecurityConfigurerAdapter` which implements the `WebSecurityConfigurer` interface.
+To customize the security settings you use `SecurityConfiguration.java`. In the example above we use the `EmbeddedLdapServerContextSourceFactoryBean`,` LdapBindAuthenticationManagerFactory` and `LdapPasswordComparisonAuthenticationManagerFactory` to create the embedded LDAP Server and an AuthenticationManager. These were introduced in Spring Security 5.7.
 
 You also need an LDAP server. Spring Boot provides auto-configuration for an embedded
 server written in pure Java, which is being used for this guide. The
