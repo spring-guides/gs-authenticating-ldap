@@ -129,7 +129,7 @@ include::complete/src/main/java/com/example/authenticatingldap/SecurityConfigura
 ----
 ====
 
-To customize the security settings you use `SecurityConfiguration.java`. In the example above we use the `EmbeddedLdapServerContextSourceFactoryBean`,` LdapBindAuthenticationManagerFactory` and `LdapPasswordComparisonAuthenticationManagerFactory` to create the embedded LDAP Server and an AuthenticationManager. These were introduced in Spring Security 5.7.
+To customize the security settings you use `SecurityConfiguration.java`. In the example above we use the `EmbeddedLdapServerContextSourceFactoryBean`,`LdapBindAuthenticationManagerFactory` and `LdapPasswordComparisonAuthenticationManagerFactory` to create the embedded LDAP Server and an AuthenticationManager. These were introduced in Spring Security 5.7.
 
 You also need an LDAP server. Spring Boot provides auto-configuration for an embedded
 server written in pure Java, which is being used for this guide. The
