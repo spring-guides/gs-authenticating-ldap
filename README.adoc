@@ -138,6 +138,19 @@ plugged into `{0}` such that it searches `uid={0},ou=people,dc=springframework,d
 the LDAP server. Also, the `passwordCompare()` method configures the encoder and the name
 of the password's attribute.
 
+== Add Application Properties
+
+Spring LDAP requires that three application properties be set in the `application.properties`` file:
+
+====
+[source,text]
+----
+spring.ldap.embedded.ldif=classpath:test-server.ldif
+spring.ldap.embedded.base-dn=dc=springframework,dc=org
+spring.ldap.embedded.port=8389
+----
+====
+
 == Set up User Data
 
 LDAP servers can use LDIF (LDAP Data Interchange Format) files to exchange user data. The
