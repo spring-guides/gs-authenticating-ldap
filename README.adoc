@@ -7,7 +7,7 @@
 
 This guide walks you through the process creating an application and securing it with the https://projects.spring.io/spring-security/[Spring Security] LDAP module.
 
-== What You Will build
+== What You Will Build
 
 You will build a simple web application that is secured by Spring Security's embedded Java-based LDAP server. You will load the LDAP server with a data file that contains a set of users.
 
