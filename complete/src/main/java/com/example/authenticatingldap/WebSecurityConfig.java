@@ -16,10 +16,10 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
-			.authorizeRequests()
+			.authorizeHttpRequests((authorize) -> authorize
 				.anyRequest().fullyAuthenticated()
-				.and()
-			.formLogin();
+			)
+			.formLogin(Customizer.withDefaults());
 
 		return http.build();
 	}
