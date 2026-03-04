@@ -42,14 +42,12 @@ NOTE: You can also fork the project from GitHub and open it in your IDE or other
 [[initial]]
 == Create a Simple Web Controller
 
-In Spring, REST endpoints are Spring MVC controllers. The following Spring MVC controller
-(from `src/main/java/com/example/authenticatingldap/HomeController.java`) handles a
-`GET /` request by returning a simple message:
+In Spring, REST endpoints are Spring MVC controllers. You can add the following Spring MVC controller, which handles a `GET /` request by returning a simple message:
 
 ====
 [source,java,tabsize=2]
 ----
-include::initial/src/main/java/com/example/authenticatingldap/HomeController.java[]
+include::complete/src/main/java/com/example/authenticatingldap/HomeController.java[]
 ----
 ====
 
