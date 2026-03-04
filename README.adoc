@@ -136,14 +136,12 @@ of the password's attribute.
 
 == Add Application Properties
 
-Spring LDAP requires that three application properties be set in the `application.properties` file:
+Spring LDAP requires that three application properties be set in the `application.properties` file to start an embedded server: the LDIF file to load, the base DN, and the port.
 
 ====
-[source,text]
+[source,properties]
 ----
-spring.ldap.embedded.ldif=classpath:test-server.ldif
-spring.ldap.embedded.base-dn=dc=springframework,dc=org
-spring.ldap.embedded.port=8389
+include::complete/src/main/resources/application.properties[]
 ----
 ====
 
