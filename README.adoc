@@ -24,7 +24,7 @@ NOTE: Because the point of this guide is to secure an unsecured web application,
 first build an unsecured web application and, later in the guide, add more dependencies
 for the Spring Security and LDAP features.
 
-You can use this https://start.spring.io/#!type=gradle-project&language=java&platformVersion=3.5.11&packaging=jar&jvmVersion=17&groupId=com.example&artifactId=authenticating-ldap&name=authenticating-ldap&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.authenticatingldap&dependencies=web[pre-initialized project] and click Generate to download a ZIP file. This project is configured to fit the examples in this tutorial.
+You can use this https://start.spring.io/#!type=gradle-project&language=java&packaging=jar&jvmVersion=17&groupId=com.example&artifactId=authenticating-ldap&name=authenticating-ldap&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.authenticatingldap&dependencies=web[pre-initialized project] and click Generate to download a ZIP file. This project is configured to fit the examples in this tutorial.
 
 To manually initialize the project:
 
@@ -102,9 +102,6 @@ include::complete/build.gradle[tag=security,indent=0]
 ----
 ====
 
-NOTE: Due to an artifact resolution issue with Gradle, *spring-tx* must be pulled in.
-Otherwise, Gradle fetches an older one that doesn't work.
-
 For a Maven-based build, add the following dependencies to the `pom.xml` file:
 
 ====
@@ -129,14 +126,17 @@ include::complete/src/main/java/com/example/authenticatingldap/WebSecurityConfig
 
 You also need an LDAP server. Spring Boot provides auto-configuration for an embedded
 server written in pure Java, which is being used for this guide. The
-`ldapAuthentication()` method configures things so that the user name at the login form is
-plugged into `{0}` such that it searches `uid={0},ou=people,dc=springframework,dc=org` in
-the LDAP server. Also, the `passwordCompare()` method configures the encoder and the name
-of the password's attribute.
+`EmbeddedLdapServerContextSourceFactoryBean` starts the embedded server and creates a
+`ContextSource` pointing to it, reading the LDIF file and base DN from
+`application.properties`. The `AuthenticationManager` bean uses
+`LdapPasswordComparisonAuthenticationManagerFactory` to configure password comparison
+against the `userPassword` attribute, with user entries searched by the pattern
+`uid={0},ou=people`. The `LdapAuthoritiesPopulator` bean loads group memberships from
+`ou=groups`.
 
 == Add Application Properties
 
-Spring LDAP requires that three application properties be set in the `application.properties` file to start an embedded server: the LDIF file to load, the base DN, and the port.
+Spring LDAP requires that three application properties be set in the `application.properties` file to start the embedded server: the LDIF file to load, the base DN, and the port.
 
 ====
 [source,properties]
