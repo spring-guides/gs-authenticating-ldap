@@ -21,13 +21,14 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
 	// tag::security[]
-	implementation("org.springframework.boot:spring-boot-starter-security")
-	implementation("org.springframework.ldap:spring-ldap-core")
-	implementation("org.springframework.security:spring-security-ldap")
-	implementation("com.unboundid:unboundid-ldapsdk")
+	implementation 'org.springframework.boot:spring-boot-starter-ldap'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.security:spring-security-ldap'
+	implementation 'com.unboundid:unboundid-ldapsdk'
 	// end::security[]
+	testImplementation 'org.springframework.boot:spring-boot-starter-ldap-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-security-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
-	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 

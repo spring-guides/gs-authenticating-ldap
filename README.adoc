@@ -124,19 +124,17 @@ include::complete/src/main/java/com/example/authenticatingldap/WebSecurityConfig
 ====
 
 
-You also need an LDAP server. Spring Boot provides auto-configuration for an embedded
-server written in pure Java, which is being used for this guide. The
-`EmbeddedLdapServerContextSourceFactoryBean` starts the embedded server and creates a
-`ContextSource` pointing to it, reading the LDIF file and base DN from
-`application.properties`. The `AuthenticationManager` bean uses
-`LdapPasswordComparisonAuthenticationManagerFactory` to configure password comparison
-against the `userPassword` attribute, with user entries searched by the pattern
-`uid={0},ou=people`. The `LdapAuthoritiesPopulator` bean loads group memberships from
-`ou=groups`.
+You also need an LDAP server.
+Spring Boot provides auto-configuration for an embedded server written in pure Java, which is being used for this guide.
+The `AuthenticationManager`bean uses `LdapPasswordComparisonAuthenticationManagerFactory` to authenticate users by comparing passwords against entries found using the pattern `uid={0},ou=people`.
+Spring Boot's auto-configured `BaseLdapPathContextSource` is injected automatically, pointed at the embedded server.
 
 == Add Application Properties
 
-Spring LDAP requires that three application properties be set in the `application.properties` file to start the embedded server: the LDIF file to load, the base DN, and the port.
+Spring LDAP requires three properties in `application.properties`.
+`spring.ldap.base` sets the base DN on the client-side `LdapContextSource`.
+`spring.ldap.embedded.base-dn` sets the base DN of the embedded server itself and references `spring.ldap.base` to avoid duplication.
+`spring.ldap.embedded.port` sets the port the embedded server listens on.
 
 ====
 [source,properties]
@@ -147,15 +145,14 @@ include::complete/src/main/resources/application.properties[]
 
 == Set up User Data
 
-LDAP servers can use LDIF (LDAP Data Interchange Format) files to exchange user data. The
-`spring.ldap.embedded.ldif` property inside `application.properties` lets Spring Boot pull
-in an LDIF data file. This makes it easy to pre-load demonstration data. The following
-listing (from `src/main/resources/test-server.ldif`) shows an LDIF file that works with this example:
+LDAP servers can use LDIF (LDAP Data Interchange Format) files to exchange user data.
+Spring Boot's embedded LDAP server automatically loads `src/main/resources/schema.ldif` by default, making it easy to pre-load demonstration data without any explicit configuration.
+The following listing shows an LDIF file that works with this example:
 
 ====
 [source,ldif]
 ----
-include::complete/src/main/resources/test-server.ldif[]
+include::complete/src/main/resources/schema.ldif[]
 ----
 ====
 
